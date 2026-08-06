@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scraped Reviews — Myntra Review Scrapper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container wide">
+        <h1>🛍️ Scraped Reviews</h1>
+        <p class="subtitle"><a href="{{ url_for('index') }}">&larr; Scrape another product</a></p>
+
+        <div class="summary-cards">
+            <div class="card">
+                <span class="card-label">Total Reviews</span>
+                <span class="card-value">{{ summary.review_count }}</span>
+            </div>
+            <div class="card">
+                <span class="card-label">Average Rating</span>
+                <span class="card-value">
+                    {% if summary.average_rating %}{{ summary.average_rating }} ★{% else %}N/A{% endif %}
+                </span>
+            </div>
+            <div class="card">
+                <span class="card-label">Data Source</span>
+                <span class="card-value">{{ summary.source }}</span>
+            </div>
+        </div>
+
+        <a class="download-btn" href="{{ url_for('download') }}">⬇️ Download CSV</a>
+
+        <table class="reviews-table">
+            <thead>
+                <tr>
+                    <th>Reviewer</th>
+                    <th>Rating</th>
+                    <th>Date</th>
+                    <th>Review</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for review in reviews %}
+                <tr>
+                    <td>{{ review.reviewer_name or "Anonymous" }}</td>
+                    <td>{{ review.rating if review.rating is not none else "—" }}</td>
+                    <td>{{ review.review_date or "—" }}</td>
+                    <td>{{ review.review_text }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <footer>
+            <p>Built with Flask, BeautifulSoup</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Myntra Review Scrapper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🛍️ Myntra Review Scrapper</h1>
+        <p class="subtitle">Extract and analyze customer reviews and ratings from Myntra product pages.</p>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('scrape') }}" method="post" class="scrape-form">
+            <label for="product_url">Myntra Product URL</label>
+            <input
+                type="text"
+                id="product_url"
+                name="product_url"
+                placeholder="https://www.myntra.com/tshirts/roadster/.../123456/buy"
+                required
+            >
+            <button type="submit">Scrape Reviews</button>
+        </form>
+
+        <footer>
+            <p>Built with Flask, BeautifulSoup &amp; Pandas — PW Skills Project</p>
+        </footer>
+    </div>
+</body>
+</html>

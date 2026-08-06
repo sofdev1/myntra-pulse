@@ -1,0 +1,152 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #fdf2f8;
+    color: #1f1f1f;
+    margin: 0;
+    padding: 40px 16px;
+}
+
+.container {
+    max-width: 640px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.container.wide {
+    max-width: 960px;
+}
+
+h1 {
+    margin-top: 0;
+    color: #e0245e;
+}
+
+.subtitle {
+    color: #555;
+    margin-bottom: 24px;
+}
+
+.subtitle a {
+    color: #e0245e;
+    text-decoration: none;
+}
+
+.flash {
+    background: #fff3cd;
+    border: 1px solid #ffe69c;
+    color: #664d03;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.scrape-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.scrape-form label {
+    font-weight: 600;
+}
+
+.scrape-form input[type="text"] {
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.scrape-form button {
+    background: #e0245e;
+    color: #fff;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.scrape-form button:hover {
+    background: #c81e50;
+}
+
+.summary-cards {
+    display: flex;
+    gap: 16px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 1;
+    min-width: 140px;
+    background: #fdf2f8;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+}
+
+.card-label {
+    display: block;
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 6px;
+}
+
+.card-value {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    color: #e0245e;
+}
+
+.download-btn {
+    display: inline-block;
+    background: #22c55e;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.download-btn:hover {
+    background: #16a34a;
+}
+
+.reviews-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.reviews-table th,
+.reviews-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.reviews-table th {
+    background: #fdf2f8;
+    color: #333;
+}
+
+footer {
+    margin-top: 32px;
+    text-align: center;
+    color: #999;
+    font-size: 13px;
+}
