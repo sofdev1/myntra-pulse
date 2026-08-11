@@ -80,7 +80,7 @@ myntra-review-scrapper/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/PWskills-DataScienceTeam/myntra-review-scrapper.git
+git clone https://github.com/sofdev1/myntra-pulse.git
 cd myntra-review-scrapper
 ```
 
@@ -170,5 +170,5 @@ pytest
 
 ## License
 
-This project is provided for educational purposes as part of the PW
-Skills Data Science program. See `LICENSE` for details.
+This project is provided for educational purposes. 
+See `LICENSE` for details.
