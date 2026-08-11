@@ -1,0 +1,17 @@
+[MASTER]
+load-plugins=
+
+[FORMAT]
+max-line-length=120
+
+[MESSAGES CONTROL]
+disable=
+    missing-module-docstring,
+    missing-function-docstring,
+    missing-class-docstring,
+    too-few-public-methods,
+    line-too-long,
+
+[DESIGN]
+max-attributes=7
+max-arguments=5
