@@ -32,13 +32,11 @@ jobs:
           pip install -r requirements.txt
           pip install flake8 black isort pylint
 
-      - name: Check code formatting with black
-        run: |
-          black --check . || true
+      - name: Check formatting with black
+        run: black --check --exclude '/(review-scraper|\.git|__pycache__)/' .
 
       - name: Check import sorting with isort
-        run: |
-          isort --check-only . || true
+        run: isort --check-only --skip review-scraper .
 
       - name: Lint with flake8
         run: |
