@@ -5,3 +5,5 @@ Flask==3.0.3
 streamlit==1.37.0
 gunicorn==22.0.0
 lxml==5.2.2
+black
+isort

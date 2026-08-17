@@ -35,7 +35,9 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 HEADERS = {
@@ -100,12 +102,14 @@ def parse_reviews_from_html(html: str) -> list:
         rating_tag = block.find(attrs={"class": re.compile(r"rating", re.I)})
         rating = extract_rating(rating_tag.get_text()) if rating_tag else None
         if text:
-            reviews.append({
-                "review_text": text,
-                "rating": rating,
-                "review_date": None,
-                "reviewer_name": None,
-            })
+            reviews.append(
+                {
+                    "review_text": text,
+                    "rating": rating,
+                    "review_date": None,
+                    "reviewer_name": None,
+                }
+            )
 
     return reviews
 
@@ -145,19 +149,33 @@ def generate_demo_reviews(product_url: str, n: int = 25) -> list:
         "Not as described, material feels cheap.",
         "Perfect fit and great customer service when I had a query.",
     ]
-    names = ["Aarav", "Priya", "Rohan", "Sneha", "Karan", "Isha", "Vikram",
-             "Neha", "Aditya", "Pooja"]
+    names = [
+        "Aarav",
+        "Priya",
+        "Rohan",
+        "Sneha",
+        "Karan",
+        "Isha",
+        "Vikram",
+        "Neha",
+        "Aditya",
+        "Pooja",
+    ]
 
-    random.seed(hash(product_url) % (10 ** 6))
+    random.seed(hash(product_url) % (10**6))
     reviews = []
     base_date = datetime.now()
     for i in range(n):
-        reviews.append({
-            "review_text": random.choice(sample_comments),
-            "rating": round(random.uniform(2.5, 5.0), 1),
-            "review_date": (base_date - timedelta(days=random.randint(0, 180))).strftime("%Y-%m-%d"),
-            "reviewer_name": random.choice(names),
-        })
+        reviews.append(
+            {
+                "review_text": random.choice(sample_comments),
+                "rating": round(random.uniform(2.5, 5.0), 1),
+                "review_date": (
+                    base_date - timedelta(days=random.randint(0, 180))
+                ).strftime("%Y-%m-%d"),
+                "reviewer_name": random.choice(names),
+            }
+        )
     return reviews
 
 
@@ -181,7 +199,9 @@ def scrape_reviews(product_url: str, use_demo_fallback: bool = True) -> pd.DataF
         review_text, rating, review_date, reviewer_name, product_url, scraped_at
     """
     if not is_valid_myntra_url(product_url):
-        raise ValueError("Please provide a valid Myntra product URL (https://www.myntra.com/...)")
+        raise ValueError(
+            "Please provide a valid Myntra product URL (https://www.myntra.com/...)"
+        )
 
     reviews = []
     source = "live"

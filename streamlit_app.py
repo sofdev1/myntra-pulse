@@ -58,7 +58,9 @@ if "reviews_df" in st.session_state:
         col2.metric("Average Rating", f"{df['rating'].mean():.2f} ★")
     else:
         col2.metric("Average Rating", "N/A")
-    col3.metric("Data Source", df["source"].iloc[0] if "source" in df.columns else "unknown")
+    col3.metric(
+        "Data Source", df["source"].iloc[0] if "source" in df.columns else "unknown"
+    )
 
     st.subheader("Rating Distribution")
     if df["rating"].notna().any():

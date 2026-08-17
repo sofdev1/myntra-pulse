@@ -23,7 +23,9 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret-key-change-in-production")
+app.secret_key = os.environ.get(
+    "FLASK_SECRET_KEY", "dev-secret-key-change-in-production"
+)
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -62,7 +64,9 @@ def scrape():
     summary = {
         "product_url": product_url,
         "review_count": len(df),
-        "average_rating": round(df["rating"].mean(), 2) if df["rating"].notna().any() else None,
+        "average_rating": (
+            round(df["rating"].mean(), 2) if df["rating"].notna().any() else None
+        ),
         "source": df["source"].iloc[0] if "source" in df.columns else "unknown",
     }
 
@@ -75,7 +79,9 @@ def download():
     if not os.path.exists(LATEST_CSV_PATH):
         flash("No scraped data available to download yet.")
         return redirect(url_for("index"))
-    return send_file(LATEST_CSV_PATH, as_attachment=True, download_name="myntra_reviews.csv")
+    return send_file(
+        LATEST_CSV_PATH, as_attachment=True, download_name="myntra_reviews.csv"
+    )
 
 
 @app.route("/health")

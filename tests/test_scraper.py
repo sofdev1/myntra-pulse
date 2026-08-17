@@ -62,7 +62,14 @@ def test_scrape_reviews_rejects_invalid_url():
 def test_scrape_reviews_returns_dataframe_with_expected_columns():
     df = scrape_reviews("https://www.myntra.com/tshirts/roadster/sample/123/buy")
     assert isinstance(df, pd.DataFrame)
-    expected_cols = {"review_text", "rating", "review_date", "reviewer_name",
-                      "product_url", "scraped_at", "source"}
+    expected_cols = {
+        "review_text",
+        "rating",
+        "review_date",
+        "reviewer_name",
+        "product_url",
+        "scraped_at",
+        "source",
+    }
     assert expected_cols.issubset(set(df.columns))
     assert len(df) > 0
