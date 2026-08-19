@@ -1,4 +1,4 @@
-# Myntra Review Scrapper
+# Myntra Pulse
 
 A web scraper that extracts and analyzes customer reviews and ratings from
 Myntra product pages, built as part of the PW Skills Data Science program.
@@ -53,6 +53,7 @@ myntra-review-scrapper/
 ├── requirements.txt
 ├── Procfile                 # gunicorn entry point for deployment
 ├── setup.sh                  # Conda environment setup script
+├── pyproject.toml            # isort config (`profile = "black"`) — must be saved as UTF-8 without BOM
 ├── templates/
 │   ├── index.html
 │   └── results.html
@@ -66,6 +67,10 @@ myntra-review-scrapper/
 ├── .gitignore
 └── README.md
 ```
+
+> Note: the local virtual environment (created as `review-scraper/` per the
+> setup steps below) lives inside the project folder but should **not** be
+> committed or scanned by formatting tools — see Linting & Formatting below.
 
 ## System Requirements
 
@@ -146,6 +151,73 @@ Navigate to **http://localhost:8501**.
 pip install pytest
 pytest
 ```
+
+## Linting & Formatting (isort + black)
+
+CI runs `isort --check-only --skip review-scraper .` on every push/PR, so
+imports must already be sorted and formatted correctly before you push.
+
+### Config
+
+`pyproject.toml` sets `profile = "black"` for isort, so its import style
+agrees with `black`'s formatting instead of conflicting with it:
+
+```toml
+[tool.isort]
+profile = "black"
+```
+
+If you ever need to recreate this file on Windows, **write it without a
+UTF-8 BOM**, or isort will silently fail to read it (you'll see `Failed
+to pull configuration information` and `Invalid statement (at line 1,
+column 1)`, and isort will fall back to a style that fights with black):
+
+```powershell
+# Windows PowerShell 5.1
+@"
+[tool.isort]
+profile = "black"
+"@ | Out-File -Encoding ascii pyproject.toml
+
+# PowerShell 7+
+@"
+[tool.isort]
+profile = "black"
+"@ | Out-File -Encoding utf8NoBOM pyproject.toml
+```
+
+Verify with `Format-Hex pyproject.toml` — it should start `5B 74 6F 6F`
+(`[too...`), not `EF BB BF`.
+
+### Fixing locally before you push
+
+The local virtual environment folder (`review-scraper/`) must be excluded
+from **both** tools, or you'll get parse errors trying to reformat
+installed packages like pandas/numpy. isort uses `--skip`, black uses
+`--extend-exclude`:
+
+```powershell
+isort --skip review-scraper .
+black --extend-exclude "review-scraper" .
+isort --check-only --skip review-scraper .
+```
+
+Run isort *before* black — running black afterward re-applies its own
+line-wrapping on top of isort's ordering, so if you run them in the
+wrong order (or `pyproject.toml` isn't set up correctly), black can
+undo isort's fix and leave the check-only step failing again.
+
+Once the check-only command passes cleanly, commit and push:
+
+```powershell
+git add .
+git commit -m "Fix import sorting and formatting"
+git push
+```
+
+Confirm the venv folder is actually excluded from git and from CI's
+scan — check `.gitignore` includes `review-scraper/` (or whatever your
+local env folder is named) so it's never committed in the first place.
 
 ## Benefits & Applications
 
