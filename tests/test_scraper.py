@@ -13,8 +13,13 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 import pandas as pd
 import pytest
 
-from scraper import (clean_text, extract_rating, generate_demo_reviews,
-                     is_valid_myntra_url, scrape_reviews)
+from scraper import (
+    clean_text,
+    extract_rating,
+    generate_demo_reviews,
+    is_valid_myntra_url,
+    scrape_reviews,
+)
 
 
 def test_is_valid_myntra_url_accepts_valid_urls():

@@ -15,8 +15,7 @@ For production, serve with gunicorn, e.g.:
 import logging
 import os
 
-from flask import (Flask, flash, redirect, render_template, request, send_file,
-                   url_for)
+from flask import Flask, flash, redirect, render_template, request, send_file, url_for
 
 from scraper import scrape_reviews
 
