@@ -25,14 +25,14 @@ For production use against the real site, you would typically extend
 browser (Selenium / Playwright) to render JS before parsing.
 """
 
+import logging
+import random
 import re
 import time
-import random
-import logging
 from datetime import datetime, timedelta
 
-import requests
 import pandas as pd
+import requests
 from bs4 import BeautifulSoup
 
 logging.basicConfig(

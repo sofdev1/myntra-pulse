@@ -12,10 +12,11 @@ For production, serve with gunicorn, e.g.:
     gunicorn app:app --bind 0.0.0.0:5000
 """
 
-import os
 import logging
+import os
 
-from flask import Flask, render_template, request, send_file, flash, redirect, url_for
+from flask import (Flask, flash, redirect, render_template, request, send_file,
+                   url_for)
 
 from scraper import scrape_reviews
 
